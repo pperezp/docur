@@ -36,12 +36,12 @@ DELIMITER $$
 CREATE PROCEDURE get_cursos(filtro VARCHAR(100))
 BEGIN
     SELECT
-        d.id AS 'ID Docente', 
-        d.rut AS 'Rut', 
-        d.nombre AS 'Docente',
-        c.id AS 'ID curso', 
-        c.nombre AS 'Nombre curso', 
-        YEAR(dc.fecha) AS 'Año de rendición'
+        d.id AS 'idDocente', 
+        d.rut AS 'rut', 
+        d.nombre AS 'docente',
+        c.id AS 'idCurso', 
+        c.nombre AS 'nombreCurso', 
+        YEAR(dc.fecha) AS 'anioRendicion'
     FROM
         curso c
     INNER JOIN 
@@ -60,10 +60,10 @@ DELIMITER $$
 CREATE PROCEDURE get_alumnos(idCurso INT)
 BEGIN
     SELECT
-        d.id AS 'ID', 
-        d.rut AS 'Rut', 
-        d.nombre as 'Nombre', 
-        YEAR(dc.fecha) AS 'Año rendición'
+        d.id AS 'id', 
+        d.rut AS 'rut', 
+        d.nombre as 'nombre', 
+        YEAR(dc.fecha) AS 'anioRendicion'
     FROM
         curso c
     INNER JOIN 
