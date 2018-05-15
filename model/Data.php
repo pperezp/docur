@@ -62,4 +62,8 @@ class Data {
     public function getAllCursos(){
         return $this->ejecutarSelect("SELECT * FROM curso");
     }
+    
+    public function getAllDocentes(){
+        return $this->ejecutarSelect("SELECT * FROM docente");
+    }
 }

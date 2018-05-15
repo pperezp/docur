@@ -7,14 +7,14 @@
     <body>
         <h1>Crear Curso</h1>
         <form action="../controller/crearCurso.php" method="post">
-            <input type="text" name="nombre" placeholder="Nombre:">
+            <input type="text" name="nombre" placeholder="Nombre:" required>
             <input type="submit" value="Registrar Curso">
         </form>
         
         <a href="../index.php">Volver</a>
         
         <h2>Listado de cursos</h2>
-        <table border="1    ">
+        <table border="1">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
