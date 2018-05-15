@@ -5,7 +5,7 @@ class Data {
     private $con;
     
     public function __construct() {
-        $this->$con = new Conexion("docur");
+        $this->con = new Conexion("docur");
     }
     
     private function ejecutar($query){
@@ -20,7 +20,7 @@ class Data {
         $this->con->conectar();
         $rs = $this->con->ejecutar($query);
         
-        while($ob = $rs->fetch_array()){
+        while($ob = $rs->fetch_object()){
             array_push($lista, $ob);
         }
         
@@ -59,6 +59,7 @@ class Data {
         return $this->ejecutarSelect($query);
     }
     
-    
-
+    public function getAllCursos(){
+        return $this->ejecutarSelect("SELECT * FROM curso");
+    }
 }
