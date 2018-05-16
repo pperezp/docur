@@ -10,8 +10,98 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <h1>Buscar</h1>
+        <a href="../index.php">Volver</a>
+        <h2>Buscar por cursos</h2>
+        <form action="buscar.php" method="post">
+            <input type="text" name="curso" list="cursos" placeholder="Curso:">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <h2>Buscar por docentes</h2>
+        <form action="buscar.php" method="post">
+            <input type="text" name="docente" list="docentes" placeholder="Docente: (Rut o nombre)">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <datalist id="cursos">
+            <?php
+            require_once("../model/Data.php");
+            $d = new Data();
+            foreach ($d->getAllCursos() as $c) {
+                echo "<option value='$c->id - $c->nombre'>";
+            }
+            ?>
+        </datalist>
+
+        <datalist id="docentes">
+            <?php
+            foreach ($d->getAllDocentes() as $doc) {
+                echo "<option value='$doc->nombre'>";
+            }
+            ?>
+        </datalist>
+
         <?php
-        // put your code here
+        $quiereBuscar = false;
+
+        if (isset($_REQUEST["curso"]) || isset($_REQUEST["docente"])) {
+            require_once '../model/Data.php';
+            $d = new Data();
+            $lista = array();
+        }
+
+        if (isset($_REQUEST["curso"])) {
+            $curso = $_REQUEST["curso"];
+            $idCurso = trim(explode("-", $curso)[0]);
+
+            $lista = $d->getAlumnos($idCurso);
+
+
+            echo "<table border='1'>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Año Rendición</th>
+                    </tr>";
+
+            foreach ($lista as $a) {
+                echo "<tr>
+                        <td>$a->id</td>
+                        <td>$a->rut</td>
+                        <td>$a->nombre</td>
+                        <td>$a->anioRendicion</td>
+                    </tr>";
+            }
+            echo "</table>";
+        } else if (isset($_REQUEST["docente"])) {
+            $docente = $_REQUEST["docente"];
+
+            $lista = $d->getCursos($docente);
+            
+            echo "<table border='1'>
+                    <tr>
+                        <th>ID Docente</th>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>ID Curso</th>
+                        <th>Curso</th>
+                        <th>Año Rendición</th>
+                    </tr>";
+            
+            foreach ($lista as $a) {
+                echo "<tr>
+                        <td>$a->idDocente</td>
+                        <td>$a->rut</td>
+                        <td>$a->docente</td>
+                        <td>$a->idCurso</td>
+                        <td>$a->nombreCurso</td>
+                        <td>$a->anioRendicion</td>
+                    </tr>";
+            }
+            echo "</table>";
+        }
         ?>
     </body>
 </html>

@@ -60,10 +60,10 @@ class Data {
     }
     
     public function getAllCursos(){
-        return $this->ejecutarSelect("SELECT * FROM curso");
+        return $this->ejecutarSelect("SELECT * FROM curso ORDER BY nombre ASC");
     }
     
     public function getAllDocentes(){
-        return $this->ejecutarSelect("SELECT * FROM docente");
+        return $this->ejecutarSelect("SELECT * FROM docente ORDER BY nombre ASC");
     }
 }
