@@ -1,3 +1,7 @@
+<?php
+require_once 'Pagina.php';
+Pagina::$ACTUAL = Pagina::$CREAR_CURSO;
+?>
 <!DOCTYPE html>
 <html>
     <head>

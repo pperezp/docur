@@ -5,7 +5,11 @@
         </li>
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            <a class="nav-link dropdown-toggle <?php
+            if(Pagina::$ACTUAL == Pagina::$CREAR_CURSO || Pagina::$ACTUAL == Pagina::$CREAR_DOCENTE){
+                echo "active";
+            }
+            ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Crear
             </a>
@@ -15,10 +19,18 @@
             </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item <?php
+        if(Pagina::$ACTUAL == Pagina::$ASIGNAR_CURSO){
+            echo "active";
+        }
+        ?>">
             <a class="nav-link" href="asignarCursoDocente.php">Asignar curso</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?php
+        if(Pagina::$ACTUAL == Pagina::$INDEX){
+            echo "active";
+        }
+        ?>">
             <a class="nav-link" href="index.php">Buscar</a>
         </li>
     </ul>

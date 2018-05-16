@@ -1,3 +1,7 @@
+<?php
+require_once 'Pagina.php';
+Pagina::$ACTUAL = Pagina::$INDEX;
+?>
 <!DOCTYPE html>
 <html>
     <head>
