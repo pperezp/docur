@@ -54,10 +54,11 @@ and open the template in the editor.
         if (isset($_REQUEST["curso"])) {
             $curso = $_REQUEST["curso"];
             $idCurso = trim(explode("-", $curso)[0]);
+            $nomCurso = trim(explode("-", $curso)[1]);
 
             $lista = $d->getAlumnos($idCurso);
 
-
+            echo "<h3>$nomCurso</h3 >";
             echo "<table border='1'>
                     <tr>
                         <th>ID</th>
@@ -76,26 +77,23 @@ and open the template in the editor.
             }
             echo "</table>";
         } else if (isset($_REQUEST["docente"])) {
-            $docente = $_REQUEST["docente"];
+            $filtro = $_REQUEST["docente"];
 
-            $lista = $d->getCursos($docente);
+            $lista = $d->getCursos($filtro);
             
+            echo "<h3>Resultados para \"$filtro\"</h3>";
             echo "<table border='1'>
                     <tr>
-                        <th>ID Docente</th>
                         <th>Rut</th>
                         <th>Nombre</th>
-                        <th>ID Curso</th>
                         <th>Curso</th>
                         <th>Año Rendición</th>
                     </tr>";
             
             foreach ($lista as $a) {
                 echo "<tr>
-                        <td>$a->idDocente</td>
                         <td>$a->rut</td>
                         <td>$a->docente</td>
-                        <td>$a->idCurso</td>
                         <td>$a->nombreCurso</td>
                         <td>$a->anioRendicion</td>
                     </tr>";

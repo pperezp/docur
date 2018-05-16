@@ -55,6 +55,8 @@ END $$
 DELIMITER ;
 /* Procedimiento  get_cursos*/
 
+
+
 /* Procedimiento  get_alumnos*/
 DELIMITER $$
 CREATE PROCEDURE get_alumnos(idCurso INT)
