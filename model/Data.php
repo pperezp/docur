@@ -5,7 +5,7 @@ class Data {
     private $con;
     
     public function __construct() {
-        $this->con = new Conexion("docur");
+        $this->con = new Conexion();
     }
     
     private function ejecutar($query){
