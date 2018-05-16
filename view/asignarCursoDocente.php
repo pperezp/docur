@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <?php require_once 'importsCSS_JS.php';?>
     </head>
     <body>
         <script> 
@@ -16,15 +17,32 @@ and open the template in the editor.
             return (tecla!==13); 
         } 
         </script> 
+        <?php require_once 'navbar.php';?>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.php">Inicio</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="asignarCursoDocente.php">Asignar Curso</a>
+                </li>
+            </ol>
+        </nav>
         
-        <h1>Asignar curso a docente</h1>
+        <div class="container">
+            <div class="row p-3">
+                <div class="col-6">
+                    <h1>Asignar curso a docente</h1>
 
-        <form action="../controller/asignarCursoDocente.php" method="post">
-            <input type="text" name="docente" list="docentes" placeholder="Docente:" required onkeypress="return pulsar(event)">
-            <input type="text" name="curso" list="cursos" placeholder="Curso:" required onkeypress="return pulsar(event)">
-            <input type="number" name="anio" placeholder="Año rendición:" required min="2000" max="2100" step="1">
-            <input type="submit" value="Asignar">
-        </form>
+                    <form action="../controller/asignarCursoDocente.php" method="post">
+                        <input class="form-control form-group" type="text" name="docente" list="docentes" placeholder="Docente:" required onkeypress="return pulsar(event)">
+                        <input class="form-control form-group" type="text" name="curso" list="cursos" placeholder="Curso:" required onkeypress="return pulsar(event)">
+                        <input class="form-control form-group" type="number" name="anio" placeholder="Año rendición:" required min="2000" max="2100" step="1">
+                        <input class="form-control btn btn-info" type="submit" value="Asignar">
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <datalist id="cursos">
             <?php
@@ -44,6 +62,5 @@ and open the template in the editor.
             ?>
         </datalist>
 
-        <a href="../index.php">Volver</a>
     </body>
 </html>
