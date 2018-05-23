@@ -40,7 +40,18 @@ Pagina::$ACTUAL = Pagina::$INDEX;
 
                 $lista = $d->getAlumnos($idCurso);
 
-                echo "<h3>$nomCurso</h3 >";
+                
+                $titulo = "<h3 class='titulo'>$nomCurso</h3>";
+                $html = "<table class='table table-striped'>
+                        <tr>
+                            <th>ID</th>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Año Rendición</th>
+                        </tr>";
+                
+                echo "<h3>$nomCurso</h3>";
+                echo "<a target='_blank' href='reporte.php'>PDF</a>";
                 echo "<table class='table table-striped'>
                         <tr>
                             <th>ID</th>
@@ -50,6 +61,13 @@ Pagina::$ACTUAL = Pagina::$INDEX;
                         </tr>";
 
                 foreach ($lista as $a) {
+                    $html .= "<tr>
+                            <td>$a->id</td>
+                            <td>$a->rut</td>
+                            <td>$a->nombre</td>
+                            <td>$a->anioRendicion</td>
+                        </tr>";
+                    
                     echo "<tr>
                             <td>$a->id</td>
                             <td>$a->rut</td>
@@ -57,13 +75,31 @@ Pagina::$ACTUAL = Pagina::$INDEX;
                             <td>$a->anioRendicion</td>
                         </tr>";
                 }
+                
+                $html .= "</table>";
                 echo "</table>";
+                
+                session_start();
+                
+                $_SESSION["titulo"] = $titulo;
+                $_SESSION["contenido"] = $html;
+                $_SESSION["curso"] = $nomCurso;
             } else if (isset($_REQUEST["docente"])) {
                 $filtro = $_REQUEST["docente"];
 
                 $lista = $d->getCursos($filtro);
 
+                $titulo = "<h3 class='titulo'>Resultados para \"$filtro\"</h3>";
                 echo "<h3>Resultados para \"$filtro\"</h3>";
+                echo "<a target='_blank' href='reporte.php'>Ver como PDF</a>";
+                
+                $html = "<table class='table table-striped'>
+                        <tr>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Curso</th>
+                            <th>Año Rendición</th>
+                        </tr>";
                 echo "<table class='table table-striped'>
                         <tr>
                             <th>Rut</th>
@@ -73,6 +109,13 @@ Pagina::$ACTUAL = Pagina::$INDEX;
                         </tr>";
 
                 foreach ($lista as $a) {
+                    $html .= "<tr>
+                            <td>$a->rut</td>
+                            <td>$a->docente</td>
+                            <td>$a->nombreCurso</td>
+                            <td>$a->anioRendicion</td>
+                        </tr>";
+                    
                     echo "<tr>
                             <td>$a->rut</td>
                             <td>$a->docente</td>
@@ -80,10 +123,18 @@ Pagina::$ACTUAL = Pagina::$INDEX;
                             <td>$a->anioRendicion</td>
                         </tr>";
                 }
+                
+                $html .= "</table>";
                 echo "</table>";
-            }
+                
+                session_start();
+                
+                $_SESSION["titulo"] = $titulo;
+                $_SESSION["contenido"] = $html;
+                $_SESSION["curso"] = $filtro;
+                }
             ?>
             </div>
         </div>
     </body>
-</html>
+</html> 
