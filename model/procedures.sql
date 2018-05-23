@@ -10,6 +10,11 @@ DELIMITER ;
 /* Procedimiento crear docente */
 
 
+
+
+
+
+
 /* Procedimiento crear curso */
 DELIMITER $$
 CREATE PROCEDURE crear_curso(nom VARCHAR(500))
@@ -20,6 +25,12 @@ DELIMITER ;
 /* Procedimiento crear curso */
 
 
+
+
+
+
+
+
 /* Procedimiento add_curso_docente */
 DELIMITER $$
 CREATE PROCEDURE add_curso_docente(idDocente INT, idCurso INT, anio VARCHAR(4))
@@ -28,6 +39,12 @@ BEGIN
 END $$
 DELIMITER ;
 /* Procedimiento add_curso_docente */
+
+
+
+
+
+
 
 
 /* Procedimiento get_cursos*/
@@ -50,10 +67,19 @@ BEGIN
         docente d ON dc.fk_docente = d.id
     WHERE 
         d.nombre LIKE CONCAT('%',filtro,'%') OR
-        d.rut = filtro;
+        d.rut = filtro
+    ORDER BY 
+        dc.fecha DESC;
 END $$
 DELIMITER ;
 /* Procedimiento  get_cursos*/
+
+
+
+
+
+
+
 
 
 
@@ -73,10 +99,18 @@ BEGIN
     INNER JOIN
         docente d ON dc.fk_docente = d.id
     WHERE 
-        c.id = idCurso;
+        c.id = idCurso
+    ORDER BY
+        dc.fecha DESC;
 END $$
 DELIMITER ;
 /* Procedimiento  get_alumnos*/
+
+
+
+
+
+
 
 /*TEST PROCEDURES*/
 CALL crear_docente('11-1','Patricio Pérez Pinto');
@@ -91,7 +125,7 @@ CALL add_curso_docente(1, 3, '2018');
 CALL add_curso_docente(2, 3, '2018');
 CALL add_curso_docente(3, 3, '2018');
 CALL get_cursos('perez');
-CALL get_alumnos(3);
+CALL get_alumnos(2);
 /*TEST PROCEDURES*/
 
 /*DROP PROCEDURES*/
